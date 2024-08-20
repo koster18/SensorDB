@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - createTable:
+            tableName: sensor
+            columns:
+              - column:
+                  name: sensor_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+  - changeSet:
+      id: 2
+      author: your_name
+      changes:
+        - createTable:
+            tableName: measure
+            columns:
+              - column:
+                  name: measure_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sensor_id
+                  type: INT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_measure_sensor
+                    references: sensor(sensor_id)
+              - column:
+                  name: value
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: raining
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: measurement_time
+                  type: DATETIME
+                  constraints:
+                    nullable: false
